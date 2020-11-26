@@ -239,4 +239,66 @@ mask = A>5
 print(mask)
 A[mask]#Returns 1D array of all values of A that satisfies the condition 
 
-#compress()
+#compress() : to see only a part of an Array ; takes 1D array in booleans 
+np.compress(np.array([True]),A,axis=0)#gives 1st row
+np.compress(np.array([True]),A,axis=1)#gives 1st column
+np.compress((A>3)[0],A,axis=1)#compress((mask)[row_index],matrix,axis); no number in 1st row > 3
+np.compress((A>7)[2],A,axis=1)#last row is greater than 7, 8 and 9 in last row greater than 7 hence we get 2 columns with 8 and 9
+np.compress((A>0)[:,1],A,axis=0)#give any row where the middle column is > 0
+np.compress((A>4)[:,2],A)#default axis is None , and works on flattened array; 
+
+#where()
+AW = np.array([[4,-2],[1,-1]])
+np.where(AW>0)#array[0,1]-->row,array[0,0]-->col ;  (0,0)-->4,(1,0)-->1 -- gives position of elements in row array and column array formate
+
+np.where(AW>0,AW,-1)#replace with value -1 if condition not satisfied in matrix
+np.where(AW>0,AW,np.array([[0,0],[0,0]]))
+np.where(AW>0,AW,np.array([[100,200],[300,400]]))#shape has to be same if replced by another matrix
+AW2 = np.array([[4,-2,-8],[1,-1,2]])
+np.where(AW2 >0,AW2,np.array([[100,200,300],[300,400,500]]))
+np.where(AW2>0,AW2,np.random.random(np.shape(AW2)))
+
+
+#np.mean , np.median, mode
+data = [i for i in range(8,44)]
+len(data)
+np.mean(data)
+
+data1  = np.array(data).reshape(6,6)
+np.mean(data1)
+np.mean(data1,axis=0)#mean of every single column
+np.mean(data1,axis=1)#mean of every single row
+
+np.median([1,9])
+np.median([1,1,9])
+np.median(data)
+
+import random
+data2 = [random.randint(1,9) for i in range(36)]#populating the list with 36 elements with values ranging from 1 to 9
+np.median(data2)
+#data2.sort()#hence proved that media is 5
+
+data3 = np.array(data2)
+data3.shape = 6,6
+np.median(data3,axis=0) #median wrt each column 
+np.median(data3,axis=1) #median wrt each row 
+
+
+from scipy.stats import mode
+mode(data3)#default axis=0
+mode(data3, axis=0)
+mode(data3, axis=1)#mode across every row
+
+mode(np.ravel(data3))#mode of entire array
+np.ravel(data3)
+
+mode(data3, axis=None)#Alternative way : mode of entire array
+
+
+sum(A)#sum of every single column
+np.sum(A)#sum of every single element
+np.sum(A, axis=0)# = sum(A); adding down the columns
+np.sum(A,axis=0,keepdims=True)#keep dimension
+np.sum(A,axis=1,initial=5)#adding 5 to every single element
+np.sum(A,axis=1)
+np.sum(A,dtype=float)

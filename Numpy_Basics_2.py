@@ -302,3 +302,33 @@ np.sum(A,axis=0,keepdims=True)#keep dimension
 np.sum(A,axis=1,initial=5)#adding 5 to every single element
 np.sum(A,axis=1)
 np.sum(A,dtype=float)
+
+#np.ravel ; flatens the array ; row by row by default id 'C'
+ 
+np.ravel(A)
+np.ravel(A,'F')#column by column -- 'F'
+#'A' --Fortran contiguous in memory . 'K'--- in order they occur in memory 
+
+#np.title
+x = (10*np.random.random((3,2))-5).astype(int)
+np.tile(x,2)#adding more same columns
+np.tile(x,(2,1))#more rows below
+np.tile(x,(2,2))#make 2*2 matric of entrie matrix i.e 2 x per row and 2 x per column
+y = np.tile(x,(2,3))#3 column and 2 rows added
+
+#roll
+np.roll(y,1)#shift by 1 row wise
+np.roll(y,2)#shift by 2
+
+#Application of roll : approximate a derivitive or the step between each point
+y - np.roll(y,1)
+
+#np.save -- save the data for later use and load
+np.save('D://sample.npy',y)
+z = np.load('D://sample.npy')
+
+#details of matrix made
+np.who()
+#np.allclose -- calculate tolerence , returns booleans 
+np.allclose(1.5,1.9)
+np.allclose(1,0.9999999999999999999)
